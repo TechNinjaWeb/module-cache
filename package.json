@@ -4,7 +4,7 @@
   "description": "Most Commonly Used Custom Angular Modules",
   "main": "config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp bower && echo \"Use gulp serve To Start App\" && exit 1"
   },
   "author": "TechNinja",
   "license": "ISC",

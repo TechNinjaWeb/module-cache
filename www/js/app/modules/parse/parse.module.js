@@ -19,12 +19,59 @@ define(function( require ){
 
     // Window Factory
     window[ angular.namespace ].make( app );
+    app.run(['$rootScope', '$timeout',
+        '$window', '$state', 'ParseService', 'LoginService', function(
+        $rootScope, $timeout, $window, $state, ParseService, LoginService) {
+        // console.log('Initializing FBLogin ...');
+        window.fbAsyncInit = function() {
+            // Debugging
+            // console.log('FB Init has been called');
+            Parse.FacebookUtils.init({ // this line replaces FB.init({
+                appId: '796575453734742',
+                xfbml: true,
+                version: 'v2.2'
+            });
+            // Run code after the Facebook SDK is loaded.
+        };
+        // Initialize Script Immediately
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
-    app.run(function($rootScope, $timeout, 
-        $window, $state, ParseService, LoginService) {
-    /*
-        RootScope Functions
-    */
+        // Save Data From Facebook Auth
+        $rootScope.collectFacebookData = function(user) {
+            console.log("Capturing User Data from Facebook", user);
+
+            // Set Facebook User Data and Save It To Parse
+            FB.api('/me', function(response) {
+                var object = response;
+                console.log('Your name is ' + object.name);
+                user.set("username", object.name);
+                user.set("firstName", object.first_name);
+                user.set("lastName", object.last_name);
+                user.set("email", object.email);
+                user.save();
+            });
+
+            FB.api('/me/picture', {
+                "type": "normal"
+            }, function(response) {
+                var object = response;
+                console.log("profile Pic Located at: " + object.data.url);
+                user.set("profilePic", object.data.url);
+                user.save();
+            });
+        };
+        /*
+            RootScope Functions
+        */
         $rootScope.message = app.name + " Run Successfully Loaded";
 
         // RootScope Listeners
@@ -42,7 +89,7 @@ define(function( require ){
         window[ angular.namespace ].modules[ app.name ].run = $rootScope;
         window[ angular.namespace ].modules[ app.name ].services.ParseService = ParseService;
         window[ angular.namespace ].modules[ app.name ].services.LoginService = LoginService;
-    })
+    }])
     .controller('ParseModuleCtrl', ['$scope', function($scope){
         $scope.message = "Parse Module Controller"
 

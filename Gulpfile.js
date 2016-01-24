@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 	concatCss = require('gulp-concat-css'),
 	gulpFilter = require('gulp-filter');
 
-gulp.task('serve-bower-files', function() {
+gulp.task('bower', function() {
     var filterJS = gulpFilter('**/*.js', { restore: true });
     return gulp.src(mainBowerFiles({
 		    paths: {
