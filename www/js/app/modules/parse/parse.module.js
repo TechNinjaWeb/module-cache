@@ -18,7 +18,7 @@ define(function( require ){
     ]);
 
     // Window Factory
-    window[ angular.Factory.namespace ].make( app );
+    window[ angular.namespace ].make( app );
 
     app.run(function($rootScope, $timeout, 
         $window, $state, ParseService, LoginService) {
@@ -39,15 +39,15 @@ define(function( require ){
         });
        
         // Window Factory
-        window[ angular.Factory.namespace ].modules[ app.name ].run = $rootScope;
-        window[ angular.Factory.namespace ].modules[ app.name ].services.ParseService = ParseService;
-        window[ angular.Factory.namespace ].modules[ app.name ].services.LoginService = LoginService;
+        window[ angular.namespace ].modules[ app.name ].run = $rootScope;
+        window[ angular.namespace ].modules[ app.name ].services.ParseService = ParseService;
+        window[ angular.namespace ].modules[ app.name ].services.LoginService = LoginService;
     })
     .controller('ParseModuleCtrl', ['$scope', function($scope){
         $scope.message = "Parse Module Controller"
 
         // Window Factory
-        window[ angular.Factory.namespace ].modules[ app.name ].controllers.appCtrl = $scope;
+        window[ angular.namespace ].modules[ app.name ].controllers.appCtrl = $scope;
     }])
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
         $stateProvider

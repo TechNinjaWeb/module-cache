@@ -1,7 +1,7 @@
 define(function(require){
     var app = angular.module('tn.modules.parse.services.login', []);
     // Window Factory
-    window[ angular.Factory.namespace ].make( app );
+    window[ angular.namespace ].make( app );
 
         app.service("LoginService", ['$state', '$rootScope', function($state, $rootScope) {
             var Login = {};
@@ -132,7 +132,7 @@ define(function(require){
             };
 
             // Window Factory
-            window[ angular.Factory.namespace ].modules[ app.name ].services.LoginService = Login;
+            window[ angular.namespace ].modules[ app.name ].services.LoginService = Login;
             return Login;
 
         }]);

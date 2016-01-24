@@ -1,13 +1,13 @@
 define(function(require){
 	var app = angular.module('tn.modules.cache', ['ui.router']);
 	// Window Factory
-	window[ angular.Factory.namespace ].make( app );
+	window[ angular.namespace ].make( app );
 
 	app.run(function($rootScope, $state, $window, DB){
 		$rootScope.message = "Cache Module Loaded Successfully";
 
 		// Winodw Factory
-		window[ angular.Factory.namespace ].modules[ app.name ].run = $rootScope;
+		window[ angular.namespace ].modules[ app.name ].run = $rootScope;
 	});
 
 	app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
@@ -27,7 +27,7 @@ define(function(require){
 			});
 	}])
 	.service("DB", function($rootScope) {
-        return window[ angular.Factory.namespace ].modules[ app.name ].services.DB = {
+        return window[ angular.namespace ].modules[ app.name ].services.DB = {
             saveToStorage: function saveToStorage(property, value) {
                 var data;
                 try {

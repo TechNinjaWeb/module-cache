@@ -7,7 +7,7 @@ define(function(require){
 	var app = angular.module('tn.modules.APP_NAME', ['ui.router']);
 
 	// Window Factory
-	$$Ninja.make( app );
+	window[ angular.namespace ].make( app );
 
 	app.run(function($rootScope, $state, $window){
 		$rootScope.message = app.name + " Module Loaded Successfully";

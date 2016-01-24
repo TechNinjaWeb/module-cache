@@ -21,14 +21,14 @@ define(function(require){
 	// console.log( $$Ninja );
 	// Add This App As Root To The Factory
 	// This Object is as good as Window
-	window[ angular.Factory.namespace ].root( app );
+	window[ angular.namespace ].root( app );
 
 	// App Controller Logic
 	app.controller('AppCtrl', ['$scope', function($scope) {
 		$scope.title = "App Controller";
 
 		// Custom Window Factory
-		window[ angular.Factory.namespace ].modules[ app.name ].controllers.appCtrl = $scope;
+		window[ angular.namespace ].modules[ app.name ].controllers.appCtrl = $scope;
 	}]);
 
 	app.run(function($rootScope, $state, $window){
@@ -64,7 +64,7 @@ define(function(require){
 		});
 
 		// Custom Window Factory
-		window[ angular.Factory.namespace ].modules[ app.name ].run = $rootScope;
+		window[ angular.namespace ].modules[ app.name ].run = $rootScope;
 	});
 
 	app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){

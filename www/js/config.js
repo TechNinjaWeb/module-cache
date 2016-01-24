@@ -33,10 +33,9 @@ require(['../modules/window.factory/index', 'settings'], function(factory, setti
     // Custom Window Namespacing
 	var namespace = settings.namespace || '$$Ninja',
 		Factory = factory( namespace );
-        Factory.namespace = namespace;
         // Attach to Angular
         angular = window.angular || {};
-        angular.Factory = Factory
+        angular.namespace = namespace
 
 
 	// Bootstrap Angular

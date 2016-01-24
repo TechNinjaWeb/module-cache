@@ -3,7 +3,7 @@ define(function(require){
             require('../cache/cache.module').name
         ]);
         // Window Factory
-        window[ angular.Factory.namespace ].make( app );
+        window[ angular.namespace ].make( app );
         // App Service
         app.service("ParseService", function(DB){
             var parse = {};
@@ -95,7 +95,7 @@ define(function(require){
                 });
             };
             // Window Factory
-            window[ angular.Factory.namespace ].modules[ app.name ].services.ParseService = parse;
+            window[ angular.namespace ].modules[ app.name ].services.ParseService = parse;
             // Return The Serice Object
             return parse;
     });
