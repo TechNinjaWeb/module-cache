@@ -31,7 +31,7 @@ define(function(require){
 		window[ angular.namespace ].modules[ app.name ].controllers.appCtrl = $scope;
 	}]);
 
-	app.run(function($rootScope, $state, $window){
+	app.run(function($rootScope, $state, $window, LoginService){
 		$rootScope.message = "App Loaded Successfully";
 		$rootScope.user = $rootScope.user || {};
 
@@ -57,8 +57,27 @@ define(function(require){
             console.log(["Going Back In History"]);
             $window.history.back();
         };
+        $rootScope.$on('persisted', function( event, saved ){
+        	console.info('Persisted: ', saved.Class );
+        });
 		// Key Listeners
-		$rootScope.$on('user', function( event, user ){
+		$rootScope.$on('user:created', function( event, user ){
+			// Set a User Object on the RootScope
+			$rootScope.user = user;
+			LoginService.login( user );
+		});
+		$rootScope.$on('user:loggedIn', function( event, user ){
+			// Set a User Object on the RootScope
+			$rootScope.user = user;
+			$rootScope.navigateTo('home.index');
+		});
+		$rootScope.$on('user:loggedOut', function( event, user ){
+			// Set a User Object on the RootScope
+			$rootScope.user = { username: "VIP"};
+			$rootScope.navigateTo('home.index');
+		});
+
+		$rootScope.$on('user:updated', function( event, user ){
 			// Set a User Object on the RootScope
 			$rootScope.user = user;
 		});

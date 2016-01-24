@@ -1,11 +1,14 @@
 define(function(require){
 
-	var app = angular.module('tn.modules.user', ['ui.router']);
+	var app = angular.module('tn.modules.user', [
+			'ui.router',
+			require('./user.service').name
+		]);
 
 	// Window Factory
 	window[ angular.namespace ].make( app );
 
-	app.run(function($rootScope, $state, $window){
+	app.run(function($rootScope, $state, $window, User){
 		$rootScope.message = "User Module Loaded Successfully";
 
 		// Winodw Factory

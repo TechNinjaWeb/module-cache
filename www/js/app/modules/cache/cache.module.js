@@ -6,6 +6,13 @@ define(function(require){
 	app.run(function($rootScope, $state, $window, DB){
 		$rootScope.message = "Cache Module Loaded Successfully";
 
+        // Key Listeners
+        $rootScope.$on('persist', function( event, save ){
+            // Persist to Cache
+            var saved = DB.saveToStorage( save.Class, save.data );
+            // Broadcast Saved Data
+            $rootScope.$broadcast('persisted', { Class: save.Class, data: saved });
+        });
 		// Winodw Factory
 		window[ angular.namespace ].modules[ app.name ].run = $rootScope;
 	});

@@ -95,9 +95,8 @@ define(function(require){
                 });
             };
             // Window Factory
-            window[ angular.namespace ].modules[ app.name ].services.ParseService = parse;
             // Return The Serice Object
-            return parse;
+            return window[ angular.namespace ].modules[ app.name ].services.ParseService  = parse;
     });
     // Return This App
     return app;
