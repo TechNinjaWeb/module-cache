@@ -1,0 +1,28 @@
+{
+  "name": "tech_ninja_modules",
+  "authors": [
+    "TechNinja"
+  ],
+  "description": "Most Commonly Used Custom Angular Modules",
+  "main": "config.js",
+  "moduleType": [],
+  "license": "private",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "toastr": "~2.1.2",
+    "jquery": "~2.2.0",
+    "bootstrap": "~3.3.6",
+    "angular-ui-router": "~0.2.15",
+    "parse": "~1.6.13"
+  }
+}
