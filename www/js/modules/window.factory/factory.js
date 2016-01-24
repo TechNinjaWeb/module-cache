@@ -5,11 +5,14 @@ define(function(require){
 			window[ namespace ].namespace = namespace; 
 			window[ namespace ].modules = {};
 			window[ namespace ].rootSet = false;
+			window[ namespace ].installed = [];
 
 		// Return Factory Controls
 		self.root = function( app ) {
 			// Debugging
 			// console.dir(self);
+			// Add To Installed List
+			window[ namespace ].installed.push( app.name );
 			// Die if already set
 			if (self.rootSet) return self.modules.root;
 			// Set Root True
@@ -26,6 +29,7 @@ define(function(require){
 			return window[ self.namespace ] = self;
 		};
 		self.make = function( app ) {
+			window[ namespace ].installed.push( app.name );
 			// Define The Child Module Namespace
 			window[ self.namespace ].modules[ app.name ] = {};
 			window[ self.namespace ].modules[ app.name ].app = app;
@@ -35,7 +39,6 @@ define(function(require){
 			// Return The Child Module
 			return window[ self.namespace ];
 		};
-		self.$ = window[ namespace ];
 
 		// Invoke Self On Winodw Now
 		return (function(n){

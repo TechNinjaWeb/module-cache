@@ -46,7 +46,7 @@ define(function() {
 										success: function(res) {
 											// Broadcast Persist
 											$rootScope.$broadcast('persist', { Class: 'User', data: res });
-											console.info("Persisted To Cache", res);
+											// console.info("Persisted To Cache", res);
 											console.alert( res.get('username') + " Logged In" );
 										},
 										error: function(res,err) {
@@ -61,7 +61,8 @@ define(function() {
 							});
 						});
 					} else {
-						console.warn("User Already Exists", { username: User.get('username'), data: User.attributes });
+						// Debugging
+						// console.warn("User Already Exists", { username: User.get('username'), data: User.attributes });
 						var getEmail = FBLogin.getEmail().then(function( FacebookData ) {
 							// Save Ref to User Object
 							var pUser = Parse.User.current();
@@ -79,7 +80,7 @@ define(function() {
 										res.fetch();
 										// Broadcast Persist
 										$rootScope.$broadcast('persist', { Class: 'User', data: res });
-										console.info("Persisted To Cache", res);
+										// console.info("Persisted To Cache", res);
 										console.alert( res.get('username') + " Logged In" );
 									},
 									error: function(res,err) {
@@ -131,7 +132,8 @@ define(function() {
                     }
                 });
             } else {
-            	console.warn("User Already Linked", user);
+            	return [ "User Already Linked", user ];
+            	// console.warn("User Already Linked", user);
             }
         };
         

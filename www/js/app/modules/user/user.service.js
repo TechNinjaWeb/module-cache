@@ -9,7 +9,8 @@ define(function(require){
         $rootScope.message = app.name + " Successfully Loaded";
         // Key Listeners
         $rootScope.$on('persisted', function( event, saved ){
-            console.log("Persisted Short Response", saved );
+            // console.log("Persisted Short Response", saved );
+            console.toast.messages.add( 'persistence', saved );
         });
         // Winodw Factory
         window[ angular.namespace ].modules[ app.name ].run = $rootScope;    
@@ -18,19 +19,15 @@ define(function(require){
         // Create Service Object
         var User = DB.getFromStorage('User') || {};
         // If Cache Has User, Save Ref
-        if ( User.hasOwnProperty('username') ) User = {
-            id: User.id,
-            data: User.data,
-            username: User.username
-        };
-        // Else Set Empty
-        else User = {
+        if ( !User.hasOwnProperty('username') ) User = {
             id: "",
             data: {},
             username: "( Ben San )"
         }; 
         // First Run Save User To Cache
-        DB.saveToStorage('User', User);
+        User = DB.saveToStorage('User', User);
+        // Key Listeners
+        
         // Server Requesting Username
         $rootScope.$on('username', function(){
             // Broadcast the Users Current Data
